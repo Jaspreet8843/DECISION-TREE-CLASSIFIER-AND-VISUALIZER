@@ -3,15 +3,19 @@ from visualize import Visualize
 import pandas as pd
 
 
-file = pd.read_csv('dataset/dataset.csv')
+file = pd.read_csv('dataset/iris.csv')
 
 heading = file.keys().tolist()
 rows = file.values.tolist()
+dt = DecisionTree(heading, rows, 0.75)
 
-dt = DecisionTree(heading, rows)
-
+dt.calcAccuracy()
 root = dt.getRoot()
 
-Visualize(root)
+v = Visualize(root)
+
+#v.draw()
+
+#v.print()
 
 

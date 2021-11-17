@@ -1,12 +1,12 @@
 Age,Competition,Type,Profit
 old,yes,s/w,down
 old,no,h/w,down
-old,no,h/w,up
-old,no,h/w,up
+old,no,h/w,down
+old,no,h/w,down
 mid,yes,s/w,down
 mid,yes,h/w,down
 mid,no,h/w,up
 mid,no,s/w,up
-new,yes,s/w,down
+new,yes,s/w,up
 new,no,h/w,up
 new,no,s/w,up

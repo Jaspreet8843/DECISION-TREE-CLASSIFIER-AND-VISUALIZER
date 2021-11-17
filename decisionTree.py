@@ -1,11 +1,47 @@
 from node import Node
-    
+import random
 
 class DecisionTree:
-    def __init__(self, heading, rows):
+    def __init__(self, heading, rows, trainTest):
         self.heading = heading
-        self.rootNode = self.main(rows, 0, "", None)
+        self.trainRows, self.testRows = self.trainTestSplit(rows, trainTest) 
+        self.rootNode = self.main(self.trainRows, 0, "", None)
 
+    # Splits the data into training and testing data
+
+    def trainTestSplit(self, rows, trainTest):
+        noOfRows = len(rows)
+        trainRows = []
+        for i in range(int(trainTest*noOfRows)):
+            trainRows.append(rows.pop(random.randint(0,len(rows)-1)))
+        return trainRows, rows
+
+    
+    # calculates the accuracy of the test data
+
+    def calcAccuracy(self):
+        tot = len(self.testRows)
+        noOfTrue = 0
+
+        for row in self.testRows:
+        #     print(list(self.predict(row))[0], row[-1])      #uncomment to see predictions vs actual results
+            if(list(self.predict(row))[0]==row[-1]):
+                noOfTrue+=1
+        print("Accuracy: ", (noOfTrue/tot)*100)
+    
+    # predicts the output for a single row
+
+    def predict(self, row):
+        node = self.rootNode
+        while node.left is not None and node.right is not None:
+            if self.askQuestion(row, node.question):
+                node = node.left
+            else:
+                node = node.right
+        return node.answer
+        # for key, value in node.answer.items():
+        #     print(key,"(",value,")")
+        # print()
 
     # receives a single row and matches it with the question to see if it is true or false
 
